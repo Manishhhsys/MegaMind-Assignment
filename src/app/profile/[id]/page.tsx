@@ -9,14 +9,17 @@ import DownloadIcon from '@/components/icons/download'
 import Image from 'next/image'
 import PlayIcon from '@/components/icons/play'
 import SkillsBar from '@/components/skills'
+import Bio from '@/components/bio'
+import SkillsIcon from '@/components/skillsicon'
+
 
 function page() {
   const params = useParams()
   const { id } = params
 
   return (
-    <div>
-    <div className="relative bg-gradient-to-r from-[#F58232] to-[#EE4D3B] h-[285px] w-full grid grid-cols-3">
+    <div className=''>
+    <div className="relative bg-gradient-to-r from-[#F58232] to-[#EE4D3B] h-[285px] w-full grid grid-cols-3 ">
 
       <div className="flex items-end m-10 gap-3 justify-center">
         <h5 className="font-helvetic font-bold text-base flex gap-2 text-white items-center">
@@ -62,6 +65,8 @@ function page() {
       <div className='flex justify-center items-center'>
         <SkillsBar></SkillsBar>
       </div>
+      <Bio></Bio>
+      <SkillsIcon></SkillsIcon>
       </div>
   )
 }
