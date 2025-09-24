@@ -3,7 +3,7 @@ import React from 'react'
 
 function NavBar() {
   return (
-    <div className='w-full h-[100px] bg-amber-50 flex  items-center p-15 '>
+    <div className='w-full h-[100px] bg-amber-50 flex  items-center p-15 sticky top-0 z-1'>
         <div className='w-[85%]'>
             <Image src={"/mainlogo.png"} width={247} height={64} alt='Main-logo'/>
         </div>
