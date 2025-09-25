@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <>
 
-      <div className="w-full lg:p-15 m-2 lg:ml-10 grid lg:grid-cols-3 lg:gap-3 grid-cols-1 gap-3  ">
+      <div className="max-w-full lg:p-15 m-2 lg:ml-10 grid lg:grid-cols-3 lg:gap-3 grid-cols-1 gap-3">
         {profiles.map((profile)=>(
           <ProfileCard key={profile.id} name={profile.name} avatarUrl={profile.avatarUrl} gender={profile.gender} age={profile.age} pronouns={profile.pronouns} id={profile.id}></ProfileCard>
         ))

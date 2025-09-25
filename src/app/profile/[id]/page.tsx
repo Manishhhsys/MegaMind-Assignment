@@ -14,7 +14,9 @@ import SkillsIcon from "@/components/skillsicon"
 import Exp from "@/components/exp"
 import VisualResume from "@/components/visualresume"
 import Footer from "@/components/Footer"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
+import { LucideArrowUpLeft, LucideMoveLeft } from "lucide-react"
+import Loading from "./loading"
 
 interface Project {
   id: string
@@ -40,8 +42,8 @@ interface Profile {
   bio: string
   resumeUrl: string
   videoUrl: string
-  email:string
-  phone:number
+  email: string
+  phone: number
   projects: Project[]
   casestudies: CaseStudy[]
 }
@@ -60,8 +62,9 @@ export default function Page() {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
   const ResumeVideoRef = useRef<HTMLElement>(null);
-  const paramsreq=useParams()
-  const {id}=paramsreq
+  const router = useRouter()
+  const paramsreq = useParams()
+  const { id } = paramsreq
 
 
   useEffect(() => {
@@ -82,7 +85,7 @@ export default function Page() {
     fetchProfile()
   }, [id])
 
-  if (loading) return <div>Loading profile...</div>
+  if (loading) return <Loading></Loading>
   if (!profile) return <div>Profile not found</div>
 
   const handleResumeClick = () => {
@@ -92,8 +95,8 @@ export default function Page() {
   }
 
   return (
-    <div>
-      
+    <div className="max-w-full">
+
       <div className="relative bg-gradient-to-r from-[#F58232] to-[#EE4D3B] h-[285px] w-full grid grid-cols-3">
         <div className="flex items-end m-10 gap-3 justify-center">
           <h5 className="font-helveticDisplay font-bold text-base flex gap-2 text-white items-center">
@@ -127,40 +130,45 @@ export default function Page() {
         </div>
       </div>
 
-      
-      <div className="w-full flex flex-col justify-center items-center p-30">
+      <div className="w-full p-5">
+        <Button variant={'outline'} className="rounded-full text-lg font-semibold font-helveticDisplay p-5" onClick={() => {
+          router.push("/")
+        }}><LucideMoveLeft></LucideMoveLeft>Back</Button>
+      </div>
+      <div className="w-full flex flex-col justify-center items-center p-5">
+
         <div className="font-HelveticaNeueBlack font-bold text-5xl">{profile.name}</div>
         <div className="font-normal font-HelveticaNeueBlack text-3xl mt-2">
           {profile.gender} | {profile.age} | {profile.pronouns}
         </div>
         <div className="mt-8">
           <Button className="bg-[#F58232] font-helveticDisplay rounded-4xl font-bold text-base text-white p-7 w-[289px] h-[48px] border border-transparent 
-hover:bg-white hover:text-black hover:border-black" onClick={()=>{
-        ResumeVideoRef.current?.scrollIntoView({behavior:'smooth'})
-}}>
+hover:bg-white hover:text-black hover:border-black" onClick={() => {
+              ResumeVideoRef.current?.scrollIntoView({ behavior: 'smooth' })
+            }}>
             <PlayIcon className="w-8 h-8 md:w-10 md:h-10 hover:text-black" /> Watch my Visual Resume Now
           </Button>
         </div>
       </div>
 
-      
+
       <div className="flex justify-center items-center p-10">
         <SkillsBar />
       </div>
 
-      <div className="flex justify-center items-center px-10 flex-wrap"> 
-      <Bio bio={profile.bio} />
+      <div className="flex justify-center items-center px-10 flex-wrap">
+        <Bio bio={profile.bio} />
       </div>
 
       <SkillsIcon />
-      <Exp projects={profile.projects} caseStudies={profile.casestudies}/>
+      <Exp projects={profile.projects} caseStudies={profile.casestudies} />
       <section ref={ResumeVideoRef}>
-        <VisualResume  videoUrl={profile.videoUrl}/>
+        <VisualResume videoUrl={profile.videoUrl} />
       </section>
-      
 
-      
-      <Footer name={profile.name} resumeUrl={profile.resumeUrl} email={profile.email} phone={profile.phone}/>
+
+
+      <Footer name={profile.name} resumeUrl={profile.resumeUrl} email={profile.email} phone={profile.phone} />
     </div>
   )
 }

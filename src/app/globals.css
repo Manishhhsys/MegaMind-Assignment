@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Adamina&family=Fjord+One&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@plugin "daisyui";
 @font-face {
   font-family: 'helvetic';
   src: url('/fonts/helveticanowtext-black-demo.ttf') format('truetype');
