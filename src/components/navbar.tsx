@@ -7,7 +7,7 @@ function NavBar() {
         <div className=''>
             <Image src={"/mainlogo.png"} width={247} height={64} alt='Main-logo' className=''/>
         </div>
-        <div className='flex lg:gap-3 '>
+        <div className='flex lg:gap-3 md:gap-2 gap-2 '>
             <Image src={"/SideLogo1.png"} width={97} height={40} alt='prime-logo'/>
             <Image src={"/SideLogo2.png"} width={97} height={40} alt='AASCB-logo'/>
         </div>

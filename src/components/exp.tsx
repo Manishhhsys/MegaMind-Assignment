@@ -4,7 +4,6 @@ import { useState } from "react";
 import ToggleSwitch3 from "./toggleswitch";
 import { CarouselDemo } from "./carousel-demo";
 
-
 interface Item {
   id: string;
   imageUrl: string;
@@ -21,7 +20,7 @@ export default function Exp({ caseStudies, projects }: ExpProps) {
     "case-studies"
   );
 
-  // decide which data to render
+  
   const items = active === "case-studies" ? caseStudies : projects;
 
   return (

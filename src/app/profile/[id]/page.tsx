@@ -15,7 +15,7 @@ import Exp from "@/components/exp"
 import VisualResume from "@/components/visualresume"
 import Footer from "@/components/Footer"
 import { useParams, useRouter } from "next/navigation"
-import { LucideArrowUpLeft, LucideMoveLeft } from "lucide-react"
+import { LucideMoveLeft } from "lucide-react"
 import Loading from "./loading"
 
 interface Project {
@@ -52,12 +52,6 @@ interface ProfileResponse {
   data: Profile
 }
 
-interface PageProps {
-  params: {
-    id: string
-  }
-}
-
 export default function Page() {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
@@ -65,7 +59,6 @@ export default function Page() {
   const router = useRouter()
   const paramsreq = useParams()
   const { id } = paramsreq
-
 
   useEffect(() => {
     async function fetchProfile() {
@@ -85,7 +78,7 @@ export default function Page() {
     fetchProfile()
   }, [id])
 
-  if (loading) return <Loading></Loading>
+  if (loading) return <Loading />
   if (!profile) return <div>Profile not found</div>
 
   const handleResumeClick = () => {
@@ -95,20 +88,30 @@ export default function Page() {
   }
 
   return (
-    <div className="max-w-full">
+    <div className="w-full overflow-x-hidden">
 
-      <div className="relative bg-gradient-to-r from-[#F58232] to-[#EE4D3B] h-[285px] w-full grid grid-cols-3">
-        <div className="flex items-end m-10 gap-3 justify-center">
-          <h5 className="font-helveticDisplay font-bold text-base flex gap-2 text-white items-center">
+      
+      <div className="relative bg-gradient-to-r from-[#F58232] to-[#EE4D3B] h-[285px] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        
+        <div className="flex md:items-end m-4 sm:m-6 lg:m-10 gap-3 md:justify-center ">
+          <Button 
+          variant={'outline'}
+          className="rounded-full text-base sm:text-lg font-semibold font-helveticDisplay px-4 sm:px-6 py-2 sm:py-4 hidden"
+          onClick={() => router.push("/")}
+        >
+          <LucideMoveLeft className="mr-2" /> Back
+        </Button>
+          <h5 className="font-helveticDisplay font-bold text-sm sm:text-base flex gap-2 text-white items-center">
             <EmailIcon /> {profile.email}
           </h5>
-          <h5 className="font-helveticDisplay font-bold text-base flex gap-2 text-white items-center">
+          <h5 className="font-helveticDisplay font-bold text-sm sm:text-base flex gap-2 text-white items-center">
             <PhoneIcon /> {profile.phone}
           </h5>
         </div>
 
+        
         <div className="relative flex justify-center items-end">
-          <div className="absolute -bottom-24 w-48 h-48 rounded-full border-4 border-white bg-white shadow-xl overflow-hidden">
+          <div className="absolute -bottom-16 sm:-bottom-24 w-32 h-32 sm:w-48 sm:h-48 rounded-full border-4 border-white bg-white shadow-xl overflow-hidden">
             <Image
               src={profile.avatarUrl}
               width={192}
@@ -119,56 +122,76 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="flex items-end m-10 gap-3 justify-center">
+        
+        <div className="flex items-end m-4 sm:m-6 lg:m-10 gap-3 justify-center">
           <Button
             variant="outline"
-            className="font-helveticDisplay text-base font-bold text-white"
+            className="font-helveticDisplay text-sm sm:text-base font-bold text-white w-full sm:w-auto"
             onClick={handleResumeClick}
           >
-            <DownloadIcon className="w-6 h-6 mr-2" /> Download My Resume
+            <DownloadIcon className=" mr-2" size={28}/> Download My Resume
           </Button>
         </div>
       </div>
 
-      <div className="w-full p-5">
-        <Button variant={'outline'} className="rounded-full text-lg font-semibold font-helveticDisplay p-5" onClick={() => {
-          router.push("/")
-        }}><LucideMoveLeft></LucideMoveLeft>Back</Button>
+      
+      <div className="w-full p-4 sm:p-5">
+        <Button 
+          variant={'outline'}
+          className="rounded-full text-base sm:text-lg font-semibold font-helveticDisplay px-4 sm:px-6 py-2 sm:py-4 hidden  lg:flex"
+          onClick={() => router.push("/")}
+        >
+          <LucideMoveLeft className="mr-2" /> Back
+        </Button>
       </div>
-      <div className="w-full flex flex-col justify-center items-center p-5">
 
-        <div className="font-HelveticaNeueBlack font-bold text-5xl">{profile.name}</div>
-        <div className="font-normal font-HelveticaNeueBlack text-3xl mt-2">
+      
+      <div className="w-full flex flex-col justify-center items-center p-4 sm:p-5">
+        <div className="font-HelveticaNeueBlack font-bold text-3xl sm:text-5xl">{profile.name}</div>
+        <div className="font-normal font-HelveticaNeueBlack text-xl sm:text-3xl mt-2 text-center">
           {profile.gender} | {profile.age} | {profile.pronouns}
         </div>
-        <div className="mt-8">
-          <Button className="bg-[#F58232] font-helveticDisplay rounded-4xl font-bold text-base text-white p-7 w-[289px] h-[48px] border border-transparent 
-hover:bg-white hover:text-black hover:border-black" onClick={() => {
+        <div className="mt-6 sm:mt-8 w-full sm:w-auto">
+          <Button
+            className="bg-[#F58232] font-helveticDisplay rounded-4xl font-bold text-sm sm:text-base text-white px-4 sm:px-7 py-2 sm:py-4 w-full sm:w-[289px] border border-transparent 
+              hover:bg-white hover:text-black hover:border-black h-[48px]"
+            onClick={() => {
               ResumeVideoRef.current?.scrollIntoView({ behavior: 'smooth' })
-            }}>
-            <PlayIcon className="w-8 h-8 md:w-10 md:h-10 hover:text-black" /> Watch my Visual Resume Now
+            }}
+          >
+            <PlayIcon className="sm:w-8 sm:h-8 mr-2" size={38} /> Watch my Visual Resume Now
           </Button>
         </div>
       </div>
 
-
-      <div className="flex justify-center items-center p-10">
+      
+      <div className="flex justify-center items-center p-5 sm:p-10">
         <SkillsBar />
       </div>
 
-      <div className="flex justify-center items-center px-10 flex-wrap">
+      
+      <div className="flex justify-center items-center px-4 sm:px-10 flex-wrap">
         <Bio bio={profile.bio} />
       </div>
 
+      
       <SkillsIcon />
+
+      
       <Exp projects={profile.projects} caseStudies={profile.casestudies} />
+
+      
       <section ref={ResumeVideoRef}>
         <VisualResume videoUrl={profile.videoUrl} />
       </section>
 
-
-
-      <Footer name={profile.name} resumeUrl={profile.resumeUrl} email={profile.email} phone={profile.phone} />
+      
+      <Footer
+        name={profile.name}
+        resumeUrl={profile.resumeUrl}
+        email={profile.email}
+        phone={profile.phone}
+      />
     </div>
   )
 }

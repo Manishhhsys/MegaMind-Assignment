@@ -1,12 +1,18 @@
 import React from "react"
 
-function DownloadIcon({ className }: { className?: string }) {
+function DownloadIcon({ className,size }: { className?: string ,size:number}) {
   return (
     <svg
       viewBox="0 0 29 24"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       fill="currentColor"
+      style={{
+        width: size || '1em',
+        height: size || '1em',
+        display: 'inline-block',
+        flexShrink: 0
+      }}
     >
       <path d="M14.5008 16.3333C14.2616 16.3333 14.033 16.2353 13.8685 16.0627L7.74346 9.646C7.21262 9.09067 7.60696 8.16667 8.37579 8.16667H11.5841V1.45833C11.5841 0.6545 12.2386 0 13.0425 0H15.9591C16.763 0 17.4175 0.6545 17.4175 1.45833V8.16667H20.6258C21.3946 8.16667 21.789 9.09067 21.2581 9.646L15.1331 16.0627C14.9686 16.2353 14.74 16.3333 14.5008 16.3333Z" />
       <path d="M26.4583 23.3333H2.54167C1.41583 23.3333 0.5 22.4175 0.5 21.2917V20.7083C0.5 19.5825 1.41583 18.6667 2.54167 18.6667H26.4583C27.5842 18.6667 28.5 19.5825 28.5 20.7083V21.2917C28.5 22.4175 27.5842 23.3333 26.4583 23.3333Z" />

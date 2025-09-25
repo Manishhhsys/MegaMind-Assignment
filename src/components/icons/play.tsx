@@ -1,10 +1,16 @@
-function PlayIcon({ className }: { className?: string }) {
+function PlayIcon({ className, size }: { className?: string; size?: number }) {
   return (
     <svg
       viewBox="0 0 39 38"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      style={{
+        width: size || '1em',
+        height: size || '1em',
+        display: 'inline-block',
+        flexShrink: 0
+      }}
     >
       <path
         d="M19.5005 38C9.02325 38 0.500488 29.4764 0.500488 19C0.500488 8.52358 9.02325 0 19.5005 0C29.9777 0 38.5005 8.52358 38.5005 19C38.5005 29.4764 29.9777 38 19.5005 38ZM27.0538 18.3343L15.9705 11.2093C15.8406 11.1251 15.6906 11.0833 15.5422 11.0833C15.4123 11.0833 15.2809 11.1158 15.1634 11.1799C14.9082 11.3191 14.7505 11.5851 14.7505 11.875V26.125C14.7505 26.4149 14.9082 26.6809 15.1634 26.8201C15.4139 26.9577 15.7277 26.9492 15.9705 26.7907L27.0538 19.6657C27.2796 19.5203 27.4172 19.269 27.4172 19C27.4172 18.731 27.2796 18.4797 27.0538 18.3343Z"
@@ -14,4 +20,4 @@ function PlayIcon({ className }: { className?: string }) {
   );
 }
 
-export default PlayIcon
+export default PlayIcon;

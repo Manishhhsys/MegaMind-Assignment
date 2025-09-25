@@ -23,89 +23,77 @@ interface CarouselDemoProps {
 }
 
 export function CarouselDemo({ items }: CarouselDemoProps) {
-  // keep API in a ref so handlers always use the current API
-  const apiRef = useRef<CarouselApi | undefined>(undefined);
-  // we still keep a piece of state to trigger re-render when API is set
-  const [, setApiState] = useState<CarouselApi | undefined>(undefined);
-
+  const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  // called by the Carousel component to hand us the API
-  const handleSetApi = (api: CarouselApi) => {
-    apiRef.current = api;
-    setApiState(api); // cause a re-render so UI (dots / counters) can update
-  };
-
-  // wire up select listener and compute count/current
+  // Update count and current when api changes or items change
   useEffect(() => {
-    const api = apiRef.current;
     if (!api) return;
 
-    const update = () => {
-      try {
-        setCurrent(api.selectedScrollSnap() + 1);
-      } catch {
-        // defensive
-      }
+    const updateState = () => {
+      setCount(api.scrollSnapList().length);
+      setCurrent(api.selectedScrollSnap() + 1);
     };
 
-    setCount(api.scrollSnapList().length || items.length);
-    update();
+    
+    updateState();
 
-    api.on("select", update);
-    // also update when window resizes (optional)
-    const onResize = () => {
-      setCount(api.scrollSnapList().length || items.length);
-      update();
-    };
-    window.addEventListener("resize", onResize);
+    
+    api.on("select", updateState);
 
     return () => {
-      // cleanup handlers
-      try {
-        api.off("select", update);
-      } catch {
-        // defensive
-      }
-      window.removeEventListener("resize", onResize);
+      api.off("select", updateState);
     };
-    // re-run effect when items array changes (recalculate snaps)
+  }, [api]);
+
+  
+  useEffect(() => {
+    if (api && items.length > 0) {
+      api.scrollTo(0);
+    }
+  }, [api, items]);
+
+  
+  useEffect(() => {
+    setCount(items.length);
+    setCurrent(1);
   }, [items]);
 
-  // navigation helpers (use ref)
   const handlePrev = () => {
-    const api = apiRef.current;
-    if (!api) return;
-    api.scrollPrev();
+    api?.scrollPrev();
   };
 
   const handleNext = () => {
-    const api = apiRef.current;
-    if (!api) return;
-    api.scrollNext();
+    api?.scrollNext();
   };
 
-  // optional: click a dot
   const handleDotClick = (index: number) => {
-    const api = apiRef.current;
-    if (!api) return;
-    api.scrollTo(index);
+    api?.scrollTo(index);
   };
 
   return (
     <div className="w-full max-w-6xl mx-auto">
-      <Carousel setApi={handleSetApi} className="w-full" opts={{ align: "start", loop: false }}>
-        <CarouselContent className=" md:-ml-4">
+      <Carousel 
+        setApi={setApi} 
+        className="w-full" 
+        opts={{ align: "start", loop: false }}
+      >
+        <CarouselContent className="md:-ml-4">
           {items.map((item) => (
-            // flex-none + explicit width classes so Embla calculates correctly
             <CarouselItem key={item.id} className="pl-2 md:pl-4 flex-none w-full sm:w-1/2 md:w-1/3">
               <Card className="w-full h-[317px]">
                 <CardContent className="flex flex-col items-start p-4 h-full">
                   <div className="w-full h-48 rounded-md overflow-hidden mb-4">
-                    <img src={item.imageUrl} alt={item.title} className="object-cover w-full h-full" />
+                    <img 
+                      src={item.imageUrl} 
+                      alt={item.title} 
+                      className="object-fill w-full h-full" 
+                    />
                   </div>
-                  <span className="text-left text-2xl font-bold font-HelveticaNeueBlack">{item.title}</span>
+                  <span className="text-left text-2xl font-bold font-HelveticaNeueBlack">
+                    {item.title}
+                  </span>
                 </CardContent>
               </Card>
             </CarouselItem>
@@ -113,9 +101,9 @@ export function CarouselDemo({ items }: CarouselDemoProps) {
         </CarouselContent>
       </Carousel>
 
-      {/* Controls */}
+      
       <div className="flex items-center justify-between mt-4 px-2">
-        {/* Dots + counter */}
+        
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {Array.from({ length: count }).map((_, index) => (
@@ -135,10 +123,22 @@ export function CarouselDemo({ items }: CarouselDemoProps) {
 
         {/* Prev / Next */}
         <div className="flex gap-1">
-          <Button variant="outline" size="icon" className="h-8 w-8 bg-transparent rounded-full" onClick={handlePrev} disabled={current === 1}>
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className="h-8 w-8 bg-transparent rounded-full" 
+            onClick={handlePrev} 
+            disabled={current === 1}
+          >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" className="h-8 w-8 bg-transparent rounded-full " onClick={handleNext} disabled={current === count}>
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className="h-8 w-8 bg-transparent rounded-full" 
+            onClick={handleNext} 
+            disabled={current === count}
+          >
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
