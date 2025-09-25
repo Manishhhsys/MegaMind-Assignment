@@ -27,8 +27,8 @@ function Footer({name,resumeUrl,email,phone}:FooterInterface) {
               <div className='flex justify-center items-center gap-2 text-[#8E8E93] font-helveticDisplay font-bold'><PhoneIcon className={'text-[#8E8E93]'}></PhoneIcon>{phone}</div>
           </div>
           <div className='gap-5 flex'>
-            <Button variant={'outline'} className='bg-transparent rounded-4xl text-[#8E8E93] p-5 border-[#8E8E93] border font-helveticDisplay text-base font-bold '><LucideGithub  ></LucideGithub>GitHub</Button>
-            <Button variant={'outline'} className='bg-transparent rounded-4xl text-[#8E8E93] p-5 border-[#8E8E93] border font-helveticDisplay text-base font-bold'><LucideLinkedin></LucideLinkedin>LinkedIn</Button>
+            <Button variant={'outline'} className='bg-transparent rounded-4xl text-[#8E8E93] p-5 border-[#8E8E93] border font-helveticDisplay text-base font-bold ' onClick={()=>window.open("https://github.com","_blank")}><LucideGithub  ></LucideGithub>GitHub</Button>
+            <Button variant={'outline'} className='bg-transparent rounded-4xl text-[#8E8E93] p-5 border-[#8E8E93] border font-helveticDisplay text-base font-bold' onClick={()=>window.open("https://www.linkedin.com/","_blank")}><LucideLinkedin></LucideLinkedin>LinkedIn</Button>
           </div>
         </div>
         <div className='w-[1000px] border-t-1 border-[#BDBEC2]'>
