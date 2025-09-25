@@ -11,6 +11,9 @@ import PlayIcon from '@/components/icons/play'
 import SkillsBar from '@/components/skills'
 import Bio from '@/components/bio'
 import SkillsIcon from '@/components/skillsicon'
+import Exp from '@/components/exp'
+import VisualResume from '@/components/visualresume'
+import Footer from '@/components/Footer'
 
 
 function page() {
@@ -67,6 +70,9 @@ function page() {
       </div>
       <Bio></Bio>
       <SkillsIcon></SkillsIcon>
+      <Exp></Exp>
+      <VisualResume></VisualResume>
+      <Footer />
       </div>
   )
 }
