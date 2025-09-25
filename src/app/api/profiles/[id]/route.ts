@@ -9,7 +9,7 @@ interface paramsInteface{
 
 export async function GET(req:NextRequest,{ params }:paramsInteface){
         try{
-            const { id } = params;
+            const { id } = await params;
             if(!id){
                 return NextResponse.json({
                     message:"Please Provide the User id"

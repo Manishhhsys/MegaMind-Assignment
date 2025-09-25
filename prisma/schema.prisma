@@ -1,47 +1,50 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+  // This is your Prisma schema file,
+  // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+  // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+  // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
-}
+  generator client {
+    provider = "prisma-client-js"
+    output   = "../src/generated/prisma"
+  }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+  }
 
 
-model Profile{
-  id String  @id  @default(uuid())
-  name String 
-  avatarUrl String
-  age      String
-  gender    String
-  pronouns  String
-  bio       String  @db.Text()
-  resumeUrl  String
-  videoUrl   String
-  projects   Project[]
-  casestudies CaseStudies[]
-}
+  model Profile {
+    id         String        @id @default(uuid())
+    name       String
+    avatarUrl  String
+    age        String
+    gender     String
+    pronouns   String
+    bio        String        @db.Text()
+    resumeUrl  String
+    videoUrl   String
+    email      String?        
+    phone      Int?          
+    projects   Project[]
+    casestudies CaseStudies[]
+  }
 
-model Project{
-    id  String @id @default(uuid())
+
+  model Project{
+      id  String @id @default(uuid())
+      imageUrl String
+      title   String
+      profileid  String
+      profile  Profile  @relation(fields: [profileid],references: [id])
+
+  }
+
+  model CaseStudies{
+    id String @id  @default(uuid())
     imageUrl String
-    title   String
+    title  String
     profileid  String
-    profile  Profile  @relation(fields: [profileid],references: [id])
-
-}
-
-model CaseStudies{
-  id String @id  @default(uuid())
-  imageUrl String
-  title  String
-  profileid  String
-  profile Profile @relation(fields: [profileid],references: [id])
-}
+    profile Profile @relation(fields: [profileid],references: [id])
+  }

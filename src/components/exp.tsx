@@ -1,22 +1,40 @@
-import React from 'react'
-import ToggleSwitch3 from './toggleswitch'
-import { Carousel } from './ui/carousel'
-import { CarouselDemo } from './carousel-demo'
+"use client";
 
-function Exp() {
-  return (
-    <div className='mt-20 w-full '>
-        <div className='flex justify-center'>
-            <div className='w-[25%] flex-wrap font-bold text-5xl'>Case Insights & Key Projects</div>
-            <div className='w-[60%] flex justify-end'>
-                <ToggleSwitch3></ToggleSwitch3>
-            </div>
-        </div>
-        <div>
-            <CarouselDemo></CarouselDemo>
-        </div>
-    </div>
-  )
+import { useState } from "react";
+import ToggleSwitch3 from "./toggleswitch";
+import { CarouselDemo } from "./carousel-demo";
+
+
+interface Item {
+  id: string;
+  imageUrl: string;
+  title: string;
 }
 
-export default Exp
+interface ExpProps {
+  caseStudies: Item[];
+  projects: Item[];
+}
+
+export default function Exp({ caseStudies, projects }: ExpProps) {
+  const [active, setActive] = useState<"case-studies" | "projects">(
+    "case-studies"
+  );
+
+  // decide which data to render
+  const items = active === "case-studies" ? caseStudies : projects;
+
+  return (
+    <div className="w-full">
+      <div className="flex justify-between p-10">
+        <div className="flex-wrap font-bold text-5xl w-[30%] font-helveticDisplay">
+          Case Insights & Key Projects
+        </div>
+        <div className="">
+          <ToggleSwitch3 active={active} setActive={setActive} />
+        </div>
+      </div>
+      <CarouselDemo items={items} />
+    </div>
+  );
+}

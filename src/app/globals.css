@@ -12,13 +12,20 @@
 }
 
 @font-face {
-  font-family: 'helvetic';
-  src: url('/fonts/helveticanowtext-black-demo.ttf') format('truetype');
+  font-family: 'helveticNowDisplay';
+  src: url('/fonts/HelveticaNowDisplay-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('/fonts/HelveticaNeueBlack.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -29,6 +36,8 @@
   --font-mono: var(--font-geist-mono);
   --font-base-adamina: 'Adamina', serif;
   --font-helvetic: 'helvetic', sans-serif;
+  --font-helveticDisplay:'helveticNowDisplay';
+  --font-HelveticaNeueBlack:'HelveticaNeue'
   --font-adamina: var(--font-base-adamina);
   --font-abhayalibre:var(--font-abhayalibre, 'Abhaya Libre');
   --color-sidebar-ring: var(--sidebar-ring);
@@ -68,7 +77,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(98.7% 0.022 95.277);
+  --background: oklch(100% 0.00011 271.152);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);

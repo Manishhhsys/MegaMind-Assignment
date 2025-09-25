@@ -2,7 +2,7 @@ import ProfileCard from "@/components/profilecard";
 import ProfileType from "@/types/profile";
 import axios from "axios"
 export default async function Home() {
-  const response=await axios.get(`${process.env.BASE_URL}/api/profiles`)
+  const response=await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/profiles`)
   const profiles=(response.data as { data: ProfileType[] }).data;
   return (
     <>
