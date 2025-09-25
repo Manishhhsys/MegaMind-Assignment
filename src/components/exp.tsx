@@ -25,8 +25,8 @@ export default function Exp({ caseStudies, projects }: ExpProps) {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between p-10">
-        <div className="flex-wrap font-bold text-5xl w-[30%] font-helveticDisplay">
+      <div className="flex lg:justify-between lg:p-10 flex-col justify-center items-center p-2 gap-5">
+        <div className="flex-wrap font-bold lg:text-5xl lg:w-[30%] font-helveticDisplay text-3xl">
           Case Insights & Key Projects
         </div>
         <div className="">

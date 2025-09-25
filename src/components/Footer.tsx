@@ -16,8 +16,8 @@ interface FooterInterface{
 function Footer({name,resumeUrl,email,phone}:FooterInterface) {
   return (
     <div className=' w-full h-full bg-[#F7F6F5] p-10 flex justify-center items-center flex-col gap-10'>
-        <div className='border rounded-xl flex flex-col justify-center items-center  bg-gradient-to-r from-[#F58232] to-[#EE4D3B] max-w-full md:w-[1254px] h-[254px] gap-6'>
-            <div className='font-bold text-5xl text-white font-helveticDisplay'>Connect with {name}</div>
+        <div className='border rounded-xl flex flex-col justify-center items-center  bg-gradient-to-r from-[#F58232] to-[#EE4D3B] max-w-full md:w-[1254px] h-[254px] gap-6 lg:p-0 px-10'>
+            <div className='font-bold lg:text-5xl text-white font-helveticDisplay text-lg'>Connect with {name}</div>
             <div><Button variant={'outline'} className='bg-white text-[#F58232] hover:text-[#F58232] p-6 font-bold text-base rounded-4xl font-helveticDisplay' onClick={()=>window.open(resumeUrl,"")}><DownloadIcon size={28} className='w-[28px] h-[24px] mr-2 fill-[#F58232] hover:text-[#F58232] '></DownloadIcon>Download My Resume</Button></div>
         </div>
 
