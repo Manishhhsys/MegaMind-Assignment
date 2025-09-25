@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Adamina&family=Fjord+One&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Adamina&family=Fjord+One&display=swap');
 @import "tailwindcss";
-/* Temporarily removed: @import "tw-animate-css"; */
-/* Temporarily removed: @plugin "daisyui"; */
+@plugin "daisyui";
+
 
 @font-face {
   font-family: 'helvetic';
