@@ -17,7 +17,8 @@ import Footer from "@/components/Footer"
 import { useParams, useRouter } from "next/navigation"
 import { LucideMoveLeft } from "lucide-react"
 import Loading from "./loading"
-
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 interface Project {
   id: string
   imageUrl: string
