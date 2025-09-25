@@ -1,8 +1,8 @@
 import prisma from "@/lib/prismaConfig";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 
-export  async function GET(req:NextRequest){
+export  async function GET(){
     try{
             const response=await prisma.profile.findMany({
                 select:{

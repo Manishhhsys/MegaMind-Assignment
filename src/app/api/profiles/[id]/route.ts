@@ -33,7 +33,7 @@ export async function GET(req:NextRequest,{ params }:paramsInteface){
             return NextResponse.json({
                 data:response
             },{status:200})
-        }catch(e:any){
+        }catch(e:unknown){
             console.log("Erorr Debug",e)
             return NextResponse.json({
                 message:"Internal Error While Feteching the Info"

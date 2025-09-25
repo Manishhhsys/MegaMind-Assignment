@@ -7,7 +7,7 @@ import {
 import ProfileType from "@/types/profile";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-function ProfileCard({id,name,avatarUrl,gender,age,pronouns}:ProfileType) {
+function ProfileCard({id,name,gender,age,pronouns}:ProfileType) {
     const router=useRouter()
     return (
         <Card className="w-[354px] h-[450px] relative overflow-hidden mb-10 cursor-pointer" id={id} onClick={()=>router.push(`/profile/${id}`)}>

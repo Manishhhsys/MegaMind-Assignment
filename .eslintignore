@@ -1,0 +1,13 @@
+# Generated files
+src/generated/
+**/generated/
+prisma/generated/
+**/*.wasm.js
+*.wasm.js
+
+# Node modules and build files
+node_modules/
+.next/
+out/
+build/
+dist/
