@@ -5,6 +5,7 @@ type ProfileType = {
   gender: string;
   age: string;
   pronouns: string;
+  
 };
 
 export default ProfileType

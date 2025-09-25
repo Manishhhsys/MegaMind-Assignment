@@ -5,16 +5,17 @@ import {
     CardHeader,
 } from "@/components/ui/card";
 import ProfileType from "@/types/profile";
+import { profile } from "console";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-function ProfileCard({id,name,gender,age,pronouns}:ProfileType) {
+function ProfileCard({id,name,gender,age,pronouns,avatarUrl}:ProfileType) {
     const router=useRouter()
     return (
         <Card className="w-[354px] h-[450px] relative overflow-hidden mb-10 cursor-pointer" id={id} onClick={()=>router.push(`/profile/${id}`)}>
             <CardHeader className="w-full h-[225px] bg-[#F6893C] rounded-t-lg" />
             <div className="absolute top-[140px] left-1/2 -translate-x-1/2">
                 <Image
-                    src={"/image/manish.jpeg"}
+                    src={avatarUrl}
                     width={168}
                     height={178}
                     alt="Profile Avatar"
